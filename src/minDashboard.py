@@ -3,13 +3,10 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-# 1. تحميل البيانات
 df = pd.read_csv(
     "../data/processed/fact_sales_features.csv", parse_dates=["Date", "Signup_Date"]
 )
 
-# 2. تجهيز البيانات (هذا الجزء كان ينقصك وهو سبب الـ NameError)
-# استخراج السنة والشهر إذا لم تكن موجودة
 df["Year"] = df["Date"].dt.year
 df["Month_Name"] = df["Date"].dt.month_name()
 
@@ -21,7 +18,7 @@ monthly_md = (
 corr_md = df.select_dtypes(include=["number"]).corr()
 
 
-# 3. تعريف الدالة (نسخة واحدة محسنة)
+
 def plot_interactive_dashboard(
     df, region_matrix, category_matrix, monthly_revenue, corr_matrix
 ):
@@ -96,5 +93,5 @@ def plot_interactive_dashboard(
     fig.show()
 
 
-# 4. استدعاء الدالة
+# 4.call function
 plot_interactive_dashboard(df, region_md, category_md, monthly_md, corr_md)
